@@ -51,15 +51,19 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      border: 5px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #071426;
-      box-shadow: 0 12px 28px rgba(0,0,0,.35);
       float: left;
       margin-right: 28px;
-      font-size: 64px;
+    }
+
+    .crest img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.35));
     }
 
     .title {
@@ -263,10 +267,10 @@
         letter-spacing: 6px;
       }
 
-      .crest {
+      .crest,
+      .crest img {
         width: 112px;
         height: 112px;
-        font-size: 48px;
       }
 
       .welcome {
@@ -290,7 +294,9 @@
 <body>
   <main class="portal">
     <section class="hero">
-      <div class="crest">🦉</div>
+      <div class="crest">
+        <img src="logo.png" alt="PennCare Academy Logo">
+      </div>
 
       <div class="title">
         <h1>PennCare Portal</h1>
