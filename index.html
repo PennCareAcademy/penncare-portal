@@ -1,29 +1,380 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PennCare Portal</title>
+
+  <style>
+    :root {
+      --navy: #06152b;
+      --navy2: #0b2342;
+      --gold: #d9ad45;
+      --softgold: #f5d37a;
+      --cream: #f7f1e7;
+      --white: #ffffff;
+      --ink: #08182d;
+      --muted: #5d6570;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+    }
+
+    .portal {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #06152b 0%, #0b2342 28%, #f7f1e7 29%);
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 110px;
+    }
+
+    .hero {
+      height: 310px;
+      padding: 34px 42px;
+      color: white;
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(3,12,28,.98), rgba(4,15,34,.84), rgba(4,15,34,.45)),
+        radial-gradient(circle at 88% 18%, rgba(217,173,69,.35), transparent 28%);
+    }
+
+    .crest {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #071426;
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      float: left;
+      margin-right: 28px;
+      font-size: 64px;
+    }
+
+    .title {
+      padding-top: 18px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: 58px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 3px 8px rgba(0,0,0,.45);
+    }
+
+    .title .line {
+      width: 360px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 12px 0 14px;
+    }
+
+    .title h2 {
+      margin: 0;
+      color: var(--softgold);
+      font-size: 25px;
+      letter-spacing: 11px;
+      font-family: Arial, sans-serif;
+      font-weight: 500;
+    }
+
+    .bell {
+      position: absolute;
+      right: 34px;
+      top: 34px;
+      width: 78px;
+      height: 78px;
+      border-radius: 16px;
+      background: rgba(7,20,38,.92);
+      border: 1px solid rgba(245,211,122,.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.3);
+    }
+
+    .gold-curve {
+      position: absolute;
+      left: -5%;
+      right: -5%;
+      bottom: -26px;
+      height: 72px;
+      background: var(--cream);
+      border-top: 8px solid var(--gold);
+      border-radius: 0 0 50% 50%;
+      transform: rotate(2deg);
+      box-shadow: 0 -4px 20px rgba(245,211,122,.35);
+    }
+
+    .welcome {
+      margin: 42px 42px 22px;
+      background: linear-gradient(135deg, #071a35, #092849);
+      border-radius: 18px;
+      color: white;
+      padding: 28px 34px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 30px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.22);
+      border: 1px solid rgba(245,211,122,.35);
+    }
+
+    .welcome .small {
+      color: var(--softgold);
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .welcome .name {
+      font-size: 52px;
+      line-height: .95;
+      margin-bottom: 18px;
+    }
+
+    .welcome .role {
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      color: #f7f1e7;
+    }
+
+    .quote {
+      border-left: 1px solid rgba(255,255,255,.22);
+      padding-left: 34px;
+      display: flex;
+      align-items: center;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 1.45;
+    }
+
+    .cards {
+      padding: 0 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      min-height: 176px;
+      display: grid;
+      grid-template-columns: 126px 1fr 24px;
+      align-items: center;
+      box-shadow: 0 10px 24px rgba(8,24,45,.15);
+      border: 1px solid rgba(217,173,69,.25);
+    }
+
+    .icon {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #071a35, #0b2e55);
+      border: 4px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+      box-shadow: 0 8px 16px rgba(8,24,45,.18);
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: 31px;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .arrow {
+      color: var(--gold);
+      font-size: 44px;
+      font-family: Arial, sans-serif;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 22px;
+      right: 22px;
+      bottom: 18px;
+      height: 92px;
+      background: linear-gradient(135deg, #071a35, #082548);
+      border: 1px solid rgba(245,211,122,.45);
+      border-radius: 22px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      box-shadow: 0 12px 28px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+
+    .nav-item {
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 16px;
+      border-right: 1px solid rgba(255,255,255,.16);
+    }
+
+    .nav-item:last-child {
+      border-right: none;
+    }
+
+    .nav-item.active {
+      color: var(--softgold);
+    }
+
+    .nav-icon {
+      font-size: 28px;
+    }
+
+    @media (max-width: 800px) {
+      .title h1 {
+        font-size: 42px;
+      }
+
+      .title h2 {
+        font-size: 18px;
+        letter-spacing: 6px;
+      }
+
+      .crest {
+        width: 112px;
+        height: 112px;
+        font-size: 48px;
+      }
+
+      .welcome {
+        grid-template-columns: 1fr;
+      }
+
+      .quote {
+        border-left: none;
+        border-top: 1px solid rgba(255,255,255,.22);
+        padding-left: 0;
+        padding-top: 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body style="margin:0; font-family:Arial; background:#071426; color:white;">
-  <div style="padding:24px;">
-    <h1 style="color:#d6b25e;">PennCare Academy</h1>
-    <h2>Student Portal</h2>
 
-    <div style="background:white; color:#071426; padding:20px; border-radius:18px; margin-top:20px;">
-      <p>Welcome back,</p>
-      <h2>Test Account</h2>
-      <p>Scholar • Class A</p>
-    </div>
+<body>
+  <main class="portal">
+    <section class="hero">
+      <div class="crest">🦉</div>
 
-    <div style="background:white; color:#071426; padding:20px; border-radius:18px; margin-top:16px;">
-      <h3>PennCare Pass</h3>
-      <p>Pass ID: PCA-260001</p>
-      <p>Status: Active</p>
-    </div>
+      <div class="title">
+        <h1>PennCare Portal</h1>
+        <div class="line"></div>
+        <h2>CAMPUS SERVICES</h2>
+      </div>
 
-    <div style="background:white; color:#071426; padding:20px; border-radius:18px; margin-top:16px;">
-      <h3>Campus Wallet</h3>
-      <p>200 CareCredits</p>
-    </div>
-  </div>
+      <div class="bell">🔔</div>
+      <div class="gold-curve"></div>
+    </section>
+
+    <section class="welcome">
+      <div>
+        <div class="small">Welcome back,</div>
+        <div class="name">Test Account</div>
+        <div class="role">🎓 Scholar &nbsp;•&nbsp; Class A</div>
+      </div>
+
+      <div class="quote">
+        Wisdom in Learning.<br />
+        Compassion in Practice.
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <div class="icon">🪪</div>
+        <div>
+          <h3>PennCare Pass</h3>
+          <p>View your campus credentials and account status.</p>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">💳</div>
+        <div>
+          <h3>Campus Wallet</h3>
+          <p>CareCredits, purchases, and account balance.</p>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">📖</div>
+        <div>
+          <h3>Academic Records</h3>
+          <p>Progress, attendance, and academic standing.</p>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚌</div>
+        <div>
+          <h3>Campus Shuttle</h3>
+          <p>Request and monitor your campus transportation.</p>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+    </section>
+
+    <nav class="bottom-nav">
+      <div class="nav-item active">
+        <div class="nav-icon">🏠</div>
+        <div>Home</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">📢</div>
+        <div>Announcements</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">✉️</div>
+        <div>i-Mail</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">📅</div>
+        <div>Schedule</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">⚙️</div>
+        <div>Settings</div>
+      </div>
+    </nav>
+  </main>
 </body>
 </html>
